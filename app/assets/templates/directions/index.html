@@ -1,0 +1,49 @@
+<div class="row" ng-controller="DirectionsController" ng-show="email">
+    <div class="col-md-3">    
+        <div ng-init="index()">
+        <h5><a ng-click="isAddNew=!isAddNew"><span class="nav-label"><i class="fa fa-plus"></i>  Add Direction </span></a></h5>
+        <div ng-show="isAddNew" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add Direction Coordinates</h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <form class="form-horizontal" id="formAddDirection" role="form" data-ng-submit="create()">
+                            <div ng-include="'assets/directions/_form.html'"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <h5><i class="fa fa-list-ul"></i> List directions </h5>
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="direction in directions | orderBy: 'created_at': false">
+                        <td> {{$index+1}}</td>
+                        <td  class="text-center">{{ direction.position_x}}</td>
+                        <td  class="text-center">{{ direction.position_y}}</td>
+                        <td  class="text-center">
+                            <div class="pull-right">
+                                <a class="btn btn-white btn-xs" ui-sref="directions#edit(direction)"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-white btn-xs" ng-click="destroy(direction)"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-success btn-xs" ng-show=!direction.isSentRequest ng-click="sendSearch(direction)">Send</a>
+                                <a class="btn btn-default btn-xs" ng-show=direction.isSentRequest ng-click="sendSearch(direction)">Sent</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h3><span class="pull-right">Guess Remaining: {{guessesRemaining}} of {{guessesCount}}</span></h3>
+        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="true" chart-series="series" chart-options="options" ></canvas>
+    </div>
+</div>
