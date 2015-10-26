@@ -1,10 +1,5 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version RUBY VERSION: 2.2.1 (2015-02-26 patchlevel 85) [x86_64-darwin14], RUBYGEMS VERSION: 2.4.6
 
 * Rails version: Rails 4.2.4
