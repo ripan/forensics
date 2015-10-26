@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require underscore
-//= require toastr/toastr
+//= require toastr
 
 //= require angular/angular
 //= require angular-route/angular-route
