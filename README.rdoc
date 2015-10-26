@@ -12,6 +12,18 @@
 
 * Frontend: TwitterBootstrap, AngularJS, UnderscoreJS, Toastr, ChartJS
 
+* Deployment: Heroku
+
+* Github URL: https://github.com/ripan/forensics.git
+
+* Application Demo URL : https://forensics.herokuapp.com
+
+* API Directions GET : /api/:email/directions
+
+* API Location GET : /api/:email/location/:x/:y
+
+
+
 
 
 
