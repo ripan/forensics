@@ -87,14 +87,13 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
             return;
         }
 
-        $scope.direction = direction
         var queryParams = {x:direction.position_x,y:direction.position_y};
         Location.query(queryParams).$promise.then(function (locations) {
-            $scope.direction.isSentRequest=true;
+            direction.isSentRequest=true;
             $scope.guessesRemaining = $scope.guessesCount - locations.length
             toastr.info('Request sent to search party successfully! Yo have '+$scope.guessesRemaining+' guess remaining');
         }, $scope.failCallbacks); 
-        $scope.direction.isSentRequest=true;       
+        direction.isSentRequest=true;       
     };    
 
     $scope.failCallbacks = function (errorResponse) {
