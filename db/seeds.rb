@@ -7,6 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+
+User.create({ email: 'guest@gmail.com', password: 'Password1'})
+
 coordinates = [
 	[-1,2],
 	[30,2],

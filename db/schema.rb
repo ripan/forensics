@@ -27,13 +27,6 @@ ActiveRecord::Schema.define(version: 20151026011312) do
 
   add_index "directions_users", ["direction_id", "user_id"], name: "index_directions_users_on_direction_id_and_user_id", using: :btree
 
-  create_table "locations", force: :cascade do |t|
-    t.integer  "position_x", limit: 4
-    t.integer  "position_y", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
