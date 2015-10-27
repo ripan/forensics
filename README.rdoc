@@ -22,6 +22,8 @@
 
 * API Location GET : /api/:email/location/:x/:y
 
+* Assumption: I am assuming dummy coordinates based on evidence. User can add or delete directions from and evidence and send the search parties to maximum of 5 locations.
+
 
 
 
