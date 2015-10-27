@@ -6,6 +6,7 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
     $scope.isAddNew = false;
     $scope.guessesCount = 5;
     $scope.guessesRemaining = 5;
+    $scope.guessLocations = [];
     $scope.email = "",
     // Create new Direction
     $scope.create = function() {
@@ -57,8 +58,9 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
         var queryParams = {x:0,y:0};
         Location.query(queryParams).$promise.then(function (locations) {
             $scope.direction.isSentRequest=true;
+            $scope.guessLocations = locations;
             $scope.guessesRemaining = $scope.guessesCount - locations.length
-        });         
+        }, $scope.failCallbacks);         
     };
 
     // Find existing Direction
@@ -74,8 +76,15 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
         }
     }, true);
 
+    $scope.$watch('guessLocations', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+            $scope.drawGrid();
+        }
+    }, true);
+
     $scope.drawGrid = function () {
         $scope.options = LineOptions;
+        $scope.series = ['Directions'];
         $scope.labels = _.chain( $scope.directions).pluck('position_x').value();
         $scope.data = [_.chain( $scope.directions).pluck('position_y').value()];
     };
@@ -90,6 +99,7 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
         var queryParams = {x:direction.position_x,y:direction.position_y};
         Location.query(queryParams).$promise.then(function (locations) {
             direction.isSentRequest=true;
+            $scope.guessLocations = locations;
             $scope.guessesRemaining = $scope.guessesCount - locations.length
             toastr.info('Request sent to search party successfully! Yo have '+$scope.guessesRemaining+' guess remaining');
         }, $scope.failCallbacks); 
@@ -97,8 +107,9 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
     };    
 
     $scope.failCallbacks = function (errorResponse) {
+        $scope.guessLocations = errorResponse.data.guseeses;
         $scope.direction.isSentRequest=false;
-        toastr.error(JSON.stringify(errorResponse.data));
+        toastr.error(JSON.stringify(errorResponse.data.error));
     };
 
 }]);
