@@ -24,8 +24,17 @@
 
 * Assumption: I am assuming dummy coordinates based on evidence. User can add or delete directions from and evidence and send the search parties to maximum of 5 locations.
 
+* Local setup
 
+ git clone https://github.com/ripan/forensics.git
+ cd forensics
+ bundle
+ bower install
+ rake db:bootstrap
 
+ Signin with test user
+ Username: guest@gmail.com
+ Passowrd: Password1
 
 
 
