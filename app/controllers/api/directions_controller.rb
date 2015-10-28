@@ -60,6 +60,11 @@ class Api::DirectionsController < ApplicationController
     end
   end
 
+  def get_guesses
+    user = User.where(email:params[:email]).take
+    render json: user.directions
+  end
+
   private
 
   def set_direction

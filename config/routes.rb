@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     scope ':email', :constraints => { :email => /.+@.+\..*/ } do
       resources :directions, except: [:new, :edit]
       get 'location/:x/:y' => 'directions#location'
+      get 'location/guesses' => 'directions#get_guesses'
     end
   end
   

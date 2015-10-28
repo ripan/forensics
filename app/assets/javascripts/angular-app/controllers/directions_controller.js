@@ -55,18 +55,26 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
     $scope.index = function() {
         $scope.email = email;
         $scope.directions = Direction.query({email:$scope.email});
-        var queryParams = {x:0,y:0};
-        Location.query(queryParams).$promise.then(function (locations) {
-            $scope.direction.isSentRequest=true;
+        Location.getGuesses().$promise.then(function (locations) {
             $scope.guessLocations = locations;
-            $scope.guessesRemaining = $scope.guessesCount - locations.length
-        }, $scope.failCallbacks);         
+            $scope.guessesRemaining = $scope.guessesCount - locations.length;
+            $scope.updateSelection();
+        });
     };
 
     // Find existing Direction
     $scope.show = function() {
         $scope.direction = Direction.get({
             id: $stateParams.id
+        });
+    };
+
+    $scope.updateSelection = function() {
+        $.each($scope.directions, function(index, direction) {
+            var sentDirection = _.find($scope.guessLocations,{position_x:direction.position_x,position_y:direction.position_y});
+            if(sentDirection){
+                direction.isSentRequest=true;
+            }
         });
     };
 
