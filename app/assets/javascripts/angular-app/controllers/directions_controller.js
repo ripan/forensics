@@ -54,12 +54,15 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
     // Find a list of Directions
     $scope.index = function() {
         $scope.email = email;
-        $scope.directions = Direction.query({email:$scope.email});
-        Location.getGuesses().$promise.then(function (locations) {
-            $scope.guessLocations = locations;
-            $scope.guessesRemaining = $scope.guessesCount - locations.length;
-            $scope.updateSelection();
+        Direction.query({email:$scope.email}).$promise.then(function (directions) {
+            $scope.directions = directions;
+            Location.getGuesses().$promise.then(function (locations) {
+                $scope.guessLocations = locations;
+                $scope.guessesRemaining = $scope.guessesCount - locations.length;
+                $scope.updateSelection();
+            });
         });
+
     };
 
     // Find existing Direction
@@ -110,14 +113,11 @@ controllers.controller('DirectionsController', ['$scope', '$stateParams', '$loca
             $scope.guessLocations = locations;
             $scope.guessesRemaining = $scope.guessesCount - locations.length
             toastr.info('Request sent to search party successfully! Yo have '+$scope.guessesRemaining+' guess remaining');
-        }, $scope.failCallbacks); 
-        direction.isSentRequest=true;       
+        }, $scope.failCallbacks);     
     };    
 
     $scope.failCallbacks = function (errorResponse) {
-        $scope.guessLocations = errorResponse.data.guseeses;
-        $scope.direction.isSentRequest=false;
-        toastr.error(JSON.stringify(errorResponse.data.error));
+        toastr.error(JSON.stringify(errorResponse.data));
     };
 
 }]);

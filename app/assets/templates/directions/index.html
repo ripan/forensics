@@ -34,7 +34,7 @@
                                 <a class="btn btn-white btn-xs" ui-sref="directions#edit(direction)"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-white btn-xs" ng-click="destroy(direction)"><i class="fa fa-times"></i></a>
                                 <a class="btn btn-success btn-xs" ng-show=!direction.isSentRequest ng-click="sendSearch(direction)">Send</a>
-                                <a class="btn btn-default btn-xs" ng-show=direction.isSentRequest ng-click="sendSearch(direction)">Sent</a>
+                                <a class="btn btn-default btn-xs" ng-show=direction.isSentRequest>Sent</a>
                             </div>
                         </td>
                     </tr>
